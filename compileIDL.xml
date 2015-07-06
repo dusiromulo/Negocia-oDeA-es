@@ -1,0 +1,25 @@
+<project>
+	<!-- ==================================================== -->
+	<!--                   Inicializacao                      -->
+	<!-- ==================================================== -->
+	<target name="init" description="Inicia as propriedades">
+		<property name="lib" value="lib"/>
+		<property name="idl" value="idl"/>
+		<property name="src" value="src"/>
+		<property name="build" value="build"/>
+		<property name="generated" value="src/generated"/>
+	</target>
+	
+	<!-- ==================================================== -->
+	<!--                   IDL compiler                       -->
+	<!-- ==================================================== -->
+	<target name="generate_idl" depends="init" description="Compila as idls">
+		<delete dir="${generated}"/>
+		<taskdef name="jacidl" classname="org.jacorb.idl.JacIDL">
+			<classpath>
+				<pathelement location="${lib}/idl.jar"/>
+			</classpath>
+		</taskdef>
+		<jacidl destdir="${generated}" srcdir="${idl}"/>
+	</target>
+</project>
